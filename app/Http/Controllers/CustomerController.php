@@ -87,7 +87,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer = Customer::find($id);
+        return view('customer.edit', ['customer' => $customer]);
     }
 
     /**
@@ -99,7 +100,28 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $customer = Customer::find($id);
+        $customer->country = $request->country;
+        $customer->postcode = $request->postcode;
+        $customer->prefecture = $request->prefecture;
+        $customer->city = $request->city;
+        $customer->ward = $request->ward;
+        $customer->streetAddress = $request->streetAddress;
+        $customer->secondaryAddress = $request->secondaryAddress;
+        $customer->company = $request->company;
+        $customer->userName = $request->userName;
+        $customer->domainName = $request->domainName;
+        $customer->email = $request->email;
+        $customer->lastName = $request->lastName;
+        $customer->firstName = $request->firstName;
+        $customer->lastKanaName = $request->lastKanaName;
+        $customer->firstKanaName = $request->firstKanaName;
+        $customer->phoneNumber = $request->phoneNumber;
+        $customer->realText = $request->realText;
+        // 保存
+        $customer->save();
+        // 詳細ページへリダイレクト
+        return redirect("/customer/".$id);
     }
 
     /**
