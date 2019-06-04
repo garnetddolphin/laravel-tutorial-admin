@@ -1,6 +1,6 @@
 <?php
 
-return [
+$conf = [
     'defaults' => [
         'guard' => 'clients',
         'passwords' => 'clients',
@@ -48,3 +48,13 @@ return [
     ],
 
 ];
+
+// 管理画面の場合は、デフォルトの認証ガードをuserに変更する
+$uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+if (strpos($uri, '/admin/') === 0 || $uri === '/admin') {
+    $conf['defaults'] = [
+        'guard' => 'web',
+        'passwords' => 'users',
+    ];
+}
+return $conf;
