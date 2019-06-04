@@ -26,7 +26,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('send.create');
     }
 
     /**
@@ -37,7 +37,30 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // ログイン情報
+        $user = \Auth::user();
+        $customer = new Customer;
+        $customer->country = $request->country;
+        $customer->postcode = $request->postcode;
+        $customer->prefecture = $request->prefecture;
+        $customer->city = $request->city;
+        $customer->ward = $request->ward;
+        $customer->streetAddress = $request->streetAddress;
+        $customer->secondaryAddress = $request->secondaryAddress;
+        $customer->company = $request->company;
+        $customer->userName = $request->userName;
+        $customer->domainName = $request->domainName;
+        $customer->email = $request->email;
+        $customer->lastName = $request->lastName;
+        $customer->firstName = $request->firstName;
+        $customer->lastKanaName = $request->lastKanaName;
+        $customer->firstKanaName = $request->firstKanaName;
+        $customer->phoneNumber = $request->phoneNumber;
+        $customer->realText = $request->realText;
+        $customer->client_id = $user->id;
+        // 保存
+        $customer->save();
+        return redirect('/customer');
     }
 
     /**
