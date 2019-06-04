@@ -13,7 +13,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        // ログイン情報
+        $user = \Auth::user();
+        $customers = Customer::where('client_id', $user->id)->get();
+        return View('customer.index', ['customers' => $customers]);
     }
 
     /**
