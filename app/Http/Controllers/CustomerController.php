@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Customer;
+
 
 class CustomerController extends Controller
 {
@@ -26,7 +28,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('send.create');
+        return view('customer.create');
     }
 
     /**
@@ -76,7 +78,7 @@ class CustomerController extends Controller
         // 引数で受け取った$idを元にfindでレコードを取得
         $send = Send::where(['id' => $id, 'client_id' => $user->id])->first();
         // viewにデータを渡す
-        return view('send.show', ['send' => $send]);
+        return view('customer.show', ['send' => $send]);
     }
 
     /**
