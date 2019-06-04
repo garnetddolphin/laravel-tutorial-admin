@@ -48,7 +48,12 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        //
+        // ログイン情報
+        $user = \Auth::user();
+        // 引数で受け取った$idを元にfindでレコードを取得
+        $send = Send::where(['id' => $id, 'client_id' => $user->id])->first();
+        // viewにデータを渡す
+        return view('send.show', ['send' => $send]);
     }
 
     /**
