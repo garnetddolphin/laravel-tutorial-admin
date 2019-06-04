@@ -132,7 +132,11 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $customer = Customer::find($id);
+        // 保存
+        $customer->delete();
+        // 詳細ページへリダイレクト
+        return redirect("/customer/");
     }
 
     public function __construct()
